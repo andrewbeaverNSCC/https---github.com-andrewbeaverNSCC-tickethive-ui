@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
 import ConcertCard from './ui/ConcertCard.jsx'
+import Header from './ui/Header.jsx'
+import Footer from './ui/Footer.jsx'
 
 function Home() {
   const [concerts, setConcerts] = useState([]) //Empty collection of concerts
@@ -14,6 +16,7 @@ function Home() {
         if(response.ok) {
             setConcerts(result)
         }
+
     }
  
     getConcerts()
@@ -21,19 +24,24 @@ function Home() {
 
   return (
     <>
-      <h1>Concerts</h1>
-      {
-        concerts.length > 0 &&
-        concerts.map(concert =>(
-          <div key={concert.ConcertId}>
-            < ConcertCard
-            ConcertTitle={concert.ConcertTitle}
-            Filename={concert.Filename}  
-            />
+      <Header />
+      <main className="container my-4">
+        <h1 className="mb-4">See upcoming concerts below!</h1>
+
+        <div className="row">
+          {concerts.map(concert => (
+            <div className="col-sm-6 col-md-4 col-lg-3 mb-3" key={concert.ConcertId}>
+              <ConcertCard
+                ConcertTitle={concert.ConcertTitle}
+                Filename={concert.Filename}
+                ConcertId={concert.ConcertId}
+              />
             </div>
-            
-        ))
-      }
+          ))}
+        </div>
+      </main>
+
+      <Footer />
     </>
   )
 }
