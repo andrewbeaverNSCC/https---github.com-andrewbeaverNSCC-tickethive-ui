@@ -1,22 +1,23 @@
 import { useState, useEffect } from 'react'
-import Header from './ui/Header.jsx'
-import Footer from './ui/Footer.jsx'
+import Header from '../ui/Header.jsx'
+import Footer from '../ui/Footer.jsx'
+import { useParams, Link } from 'react-router-dom'
 
-export default function Details({ concertId }) {
+export default function Details() {
+  const { id } = useParams()
   const [concert, setConcert] = useState(null)
 
-  const id =
-    concertId ??
-    (typeof window !== 'undefined' ? window.location.pathname.split('/concerts/')[1] : null)
 
-  const apiUrl = import.meta.env.VITE_API_URL
+
+  // ../api/photos/#
+  const apiUrl = import.meta.env.VITE_API_URL + `/${id}`
 
   useEffect(() => {
     if (!apiUrl || !id) return
 
     ;(async () => {
       
-        let res = await fetch(`${apiUrl}/${id}`)
+        let res = await fetch(apiUrl)
         if (res.ok) {
           setConcert(await res.json())
           return
@@ -51,12 +52,12 @@ if (!concert) {
             {concert.ConcertTime && <p className="text-muted mb-1"><strong>Date: </strong>{concert.ConcertTime}</p>}
             {concert.Location && <p className="text-muted mb-2"><strong>Location: </strong>{concert.Location}</p>}
             {concert.CategoryName && <p className="text-muted mb-2"><strong>Category: </strong>{concert.CategoryName}</p>}
-            {concert.OwnerName && <p className="text-muted mb-2"><strong>Organiser: </strong>{concert.OwnerName}</p>}
+            {concert.OwnerName && <p className="text-muted mb-2"><strong>Owner: </strong>{concert.OwnerName}</p>}
 
             {concert.Description && <p style={{ whiteSpace: 'pre-wrap' }}>{concert.Description}</p>}
 
             <div className="mt-3">
-              <a href="/" className="btn btn-link">Back</a>
+              <Link to="/" className="btn btn-link">Back</Link>
             </div>
           </div>
         </div>

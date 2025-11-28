@@ -1,17 +1,19 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import Home from './Home'
-import Details from './Details.jsx'
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 
-// Pick the current route component to render
-const pathname = window.location.pathname
-const App = pathname.startsWith('/concerts/') 
-  ? <Details concertId={pathname.split('/concerts/')[1] || null} /> 
-  : <Home />
+import Home from './routes/Home.jsx'
+import Details from './routes/Details.jsx'
+//import Purchase from './routes/Purchase.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    {App}
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/concerts/:id" element={<Details />} />
+        </Routes> 
+    </Router>
   </StrictMode>
 )

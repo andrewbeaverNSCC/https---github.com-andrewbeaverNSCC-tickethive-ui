@@ -1,17 +1,22 @@
 import logo from '../assets/logo.png'
+import { Link } from 'react-router-dom'
 
 export default function Header() {
   return (
     <nav className="full-bleed navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
       <div className="container-fluid">
-        <a className="navbar-brand d-flex align-items-center" href="/">
+        {/* <a className="navbar-brand d-flex align-items-center" href="/"> */}
+        <Link className="navbar-brand d-flex align-items-center" to="/">
           <img
             src={logo}
             alt="Logo"
             style={{ height: '48px', width: 'auto', verticalAlign: 'middle', marginRight: '8px' }}
           />
           TicketHive
-        </a>
+          </Link>
+        {/* </a> */}
+        
+        
 
         <button
           className="navbar-toggler"

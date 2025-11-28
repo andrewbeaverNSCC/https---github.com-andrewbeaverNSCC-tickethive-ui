@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react'
-import ConcertCard from './ui/ConcertCard.jsx'
-import Header from './ui/Header.jsx'
-import Footer from './ui/Footer.jsx'
+import ConcertCard from '../ui/ConcertCard.jsx'
+import Header from '../ui/Header.jsx'
+import Footer from '../ui/Footer.jsx'
 
 function Home() {
   const [concerts, setConcerts] = useState([]) //Empty collection of concerts
 
+  // ../api/concerts
   const apiUrl = import.meta.env.VITE_API_URL
 
   useEffect(() => {

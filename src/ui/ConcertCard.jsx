@@ -1,21 +1,24 @@
-function ConcertCard(props){
-  const id = props.ConcertId ?? props.id
-  const href = id ? `/concerts/${id}` : '#'
+import { Link } from 'react-router-dom'
+
+function ConcertCard(props) {
+
 
   return (
     <>
       <div className="card h-100 shadow-sm text-center overflow-hidden" style={{ borderRadius: 8 }}>
         <div className="concert-image-wrap">
-          <a href={href} className="img-hover" aria-label={`View details for ${props.ConcertTitle}`}>
-            <img
-              src={props.Filename}              alt={props.ConcertTitle}
-           />
-          </a>
+          <Link
+            to={props.ConcertId ? `/concerts/${props.ConcertId}` : '#'}
+            className="img-hover d-block"
+            aria-label={`View details for ${props.ConcertTitle}`}
+          >
+            <img src={props.Filename} alt={props.ConcertTitle} />
+          </Link>
         </div>
 
         <div className="card-body py-2">
           <h5
-            className="card-title mb-0 "
+            className="card-title mb-0"
             title={props.ConcertTitle}
             style={{ fontSize: '1rem', fontWeight: 600 }}
           >
@@ -26,4 +29,5 @@ function ConcertCard(props){
     </>
   )
 }
+
 export default ConcertCard
