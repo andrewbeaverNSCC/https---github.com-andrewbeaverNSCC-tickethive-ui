@@ -5,7 +5,8 @@ import { BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 
 import Home from './routes/Home.jsx'
 import Details from './routes/Details.jsx'
-//import Purchase from './routes/Purchase.jsx'
+import Purchase from './routes/Purchase.jsx'
+import PurchaseSuccess from './routes/PurchaseSuccess.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -13,6 +14,8 @@ createRoot(document.getElementById('root')).render(
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/concerts/:id" element={<Details />} />
+        <Route path="/purchase/:id" element={<Purchase />} />
+        <Route path="/purchase-success/:id" element={<PurchaseSuccess />} />
         </Routes> 
     </Router>
   </StrictMode>

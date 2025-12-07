@@ -2,12 +2,11 @@ import { useState, useEffect } from 'react'
 import Header from '../ui/Header.jsx'
 import Footer from '../ui/Footer.jsx'
 import { useParams, Link } from 'react-router-dom'
+import ConcertDetailsCard from '../ui/ConcertDetailsCard.jsx'
 
 export default function Details() {
   const { id } = useParams()
   const [concert, setConcert] = useState(null)
-
-
 
   // ../api/photos/#
   const apiUrl = import.meta.env.VITE_API_URL + `/${id}`
@@ -40,24 +39,24 @@ if (!concert) {
     <>
       <Header />
 
-<main className="container my-4">
+    <main className="container-fluid my-4">
         <div className="row justify-content-center">
-          <div className="col-12 col-md-8">
-            <div className="concert-image-wrap mb-3" style={{ borderRadius: 8 }}>
-              <img src={concert.Filename} alt={concert.ConcertTitle} />
+          <div className="col-12">
+            <div className="mb-3 text-center">
+              <img
+                src={concert.Filename}
+                alt={concert.ConcertTitle}
+                style={{
+                  width: '100%',
+                  maxWidth: '700px',
+                  height: 'auto',
+                }}
+              />
             </div>
-
-            <h1 style={{ fontSize: '1.5rem', fontWeight: 700, marginBottom: 8 }}>{concert.ConcertTitle}</h1>
-
-            {concert.ConcertTime && <p className="text-muted mb-1"><strong>Date: </strong>{concert.ConcertTime}</p>}
-            {concert.Location && <p className="text-muted mb-2"><strong>Location: </strong>{concert.Location}</p>}
-            {concert.CategoryName && <p className="text-muted mb-2"><strong>Category: </strong>{concert.CategoryName}</p>}
-            {concert.OwnerName && <p className="text-muted mb-2"><strong>Owner: </strong>{concert.OwnerName}</p>}
-
-            {concert.Description && <p style={{ whiteSpace: 'pre-wrap' }}>{concert.Description}</p>}
-
-            <div className="mt-3">
-              <Link to="/" className="btn btn-link">Back</Link>
+            <div className="row justify-content-center">
+              <div className="col-12 col-md-10 col-lg-8">
+                <ConcertDetailsCard concert={concert} id={id} />
+              </div>
             </div>
           </div>
         </div>
